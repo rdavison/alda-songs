@@ -1,0 +1,260 @@
+(comment "
+MIT License
+
+Copyright (c) 2017 Richard Davison
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. ")
+
+(tempo! 120)
+
+(comment "define the musical instruments")
+midi-electric-piano-1 "RH-2":
+midi-electric-piano-1 "RH-1":
+midi-electric-piano-1 "LH-3":
+midi-electric-piano-1 "LH-2":
+midi-electric-piano-1 "LH-1":
+
+(comment "common elements")
+measure_rest = [r8]*5
+phrase_rest = measure_rest*4
+
+(comment "A-section")
+melody_accompaniment_l2 = r8 [f+/a]*4 | r [f+/a]*2 r f+/a | r [f/a]*2 e/g/a f/a | r [f/a]*2 e/g/a f/a
+melody_accompaniment_l1 = d4.~4 | d4. c4 | < b-4.~4 | b-4. b-4
+melody_phrase1 = a8 > d4 e8 e16 f+ | d e f+4 e | g8 f e f d8~ | 8 c4. < b-8
+melody_phrase2 = a8 > d e4 f+8 | a f+ d e4 | e8 > g f e c8~ | 8 << a16 > d d e e f g8
+
+(comment "B-section")
+arpeggio_gm = g8 > d g b- > d
+arpeggio_ebM = e-8 g b- > e- g
+arpeggio_cm = c8 e- g > c e-
+arpeggio_cM = c8 e g > c e
+arpeggio_dM = d8 f+ a > d f+
+arpeggio_bbM = b-8 > d f b- > d
+arpeggio_aM = a8 > c+ e a > c+
+section_B_transition_RH = [
+  [o4 r8 g/b-     g/b-      g/a     g/b-     ]*2
+  [o4 r  g/b-/>e- <g/b-/>e- <g/a/>d <g/b-/>e-]*2
+  [o4 r  g/b-/>c  <g/b-/>c  <g/a/b- g/b-/>c  ]*2
+]
+section_B_transition_LH = [
+  [o3 arpeggio_gm]*2
+  [o3 arpeggio_ebM]*2
+  [o4 arpeggio_cm]*2
+]
+section_B_subsection_A_RH = [
+  measure_rest
+  o5 [r8]*3 g a
+  > c {< b- > c < b-}8 a g {f g f}8
+  e-16 d c < b- a g f e- d c
+]
+section_B_subsection_B_RH = [
+  measure_rest
+  o4 [r8]*3 g a
+  > c {< b- > c < b-}8 a g {f g f}8
+  e-16 d c < b- > c d e- f g e
+]
+section_B_subsection_C_RH = [
+  f+8 [r]*4
+  measure_rest
+  o5 <f8/>d <f/>d <e/>c <f/>d <d/a
+  o5 <f/>d <f/>d <g/>e <a/>f <f/>d
+  o5 <e/>c <e/>c <d/b- e/>c <c/g
+  o5 <e/>c <e/>c <f/>d <g/>e <e/>c
+  o4 d/b- d/b- c/a d/b- <b-/>f
+  o4 d/b- d/b- e/>c <f/>d <d/b-
+  o4 c+/a c+/a c+16/b <a >c+/>c+ <e/a a/>c+ c+/e
+  e4.~4/a4.~4
+]
+section_B_subsection_A_LH = [
+  [o4 arpeggio_dM]*2
+  [o3 arpeggio_bbM]*2
+]
+section_B_subsection_B_LH = [section_B_subsection_A_LH]
+section_B_subsection_C_LH = [
+  [o4 arpeggio_dM]*2
+  [o3 arpeggio_bbM]*2
+  [o4 arpeggio_cM]*2
+  [o3 arpeggio_bbM]*2
+  [o3 arpeggio_aM]*2
+]
+
+(comment "C-section")
+section_C_subsection_A_RH1 = [
+    o5 a8 > d4 e8~16 f+16
+    d e f+4 e
+    d4.~4
+    measure_rest
+    measure_rest
+    measure_rest
+    measure_rest
+    measure_rest
+]
+
+section_C_subsection_A_RH2 = [
+    measure_rest
+    o3 a8 > d4 e8~16 f+16
+    d e f+4 e
+    d4.~4
+    measure_rest
+    measure_rest
+    measure_rest
+    measure_rest
+]
+
+section_C_subsection_A_LH1 = [
+    measure_rest
+    measure_rest
+    o5 b8 > c+ d d e
+    f+ {e f+ e}8 d {c+ d c+}8 < b-8
+    o1 a8 > d4 e8 e16 f+
+    d e f+4 e
+    d4.~4~
+    4.~4
+]
+
+section_C_subsection_A_LH2 = [
+    o4 d4.~4/a4.~4/>f+4.~4
+    o4 a/>d/f+/>c
+    o4 b/>d/g
+    o4 b-/>d/g
+    o4 d/f+/a
+    o4 d/f+/b
+    o4 d/f+/a/>c+
+    o4 d/f+/b
+]
+
+(comment "D-section")
+section_D_subsection_A_RH1 = [
+    o5 a8 > d e4 f+8
+    a f+ d e4
+    e8 f+ < a b4
+    b-4.~4
+]*2
+
+section_D_subsection_A_LH1 = [
+    o5 d8 f+ a4.
+    g8 f+ g f+ e
+    d4.~4
+    f8 e d e f
+]*2
+
+section_D_subsection_A_LH2 = [
+    o3 d8/>d [r]*4
+    o3 c8/>c [r]*4
+    o2 b8/>b [r]*4
+    o2 b-8/>b- [r]*4
+]*2
+
+section_D_subsection_A_LH3 = [
+    (volume 75)
+    [measure_rest]*4
+    r8 [o4 f+/a/>d]*4
+    r8 [o4 f+/a/>d]*4
+    r8 [o4 f+/a/>d]*2 [o4 f+/a/>c+] [o4 f+/a/>d]
+    r8 [o4 f/a/>d]*2 [o4 e/a/>c] [o4 f/a/>d]
+]
+
+section_D_subsection_A_RH2 = [
+    o4 f+4.~4/a4.~4
+    o4 f+4.~4/a4.~4
+    g4.~4/b4.~4
+    f4.~4/a4.~4
+]*2
+
+%song-start
+(comment "introduction")
+LH-3/RH-1/RH-2: phrase_rest
+LH-2: o4 melody_accompaniment_l2
+LH-1: o4 melody_accompaniment_l1
+
+(comment "melody first time through")
+LH-3/RH-2: [phrase_rest]*2
+RH-1: o4 melody_phrase1 | o4 melody_phrase2
+LH-2: [o4 melody_accompaniment_l2]*2
+LH-1: [o4 melody_accompaniment_l1]*2
+
+(comment "melody repetition in octaves")
+RH-2: o5 melody_phrase1 | o5 melody_phrase2
+RH-1: o4 melody_phrase1 | o4 melody_phrase2
+LH-3: [phrase_rest]*2
+LH-2: [o4 melody_accompaniment_l2]*2
+LH-1: [o4 melody_accompaniment_l1]*2
+
+RH-1: section_B_transition_RH
+LH-1: section_B_transition_LH
+LH-2/LH-3/RH-2: [measure_rest]*6
+
+RH-1: section_B_subsection_A_RH
+LH-1: section_B_subsection_A_LH
+LH-2/LH-3/RH-2: [measure_rest]*4
+
+RH-1: section_B_subsection_B_RH
+LH-1: section_B_subsection_B_LH
+LH-2/LH-3/RH-2: [measure_rest]*4
+
+RH-1: section_B_subsection_C_RH
+LH-1: section_B_subsection_C_LH
+LH-2/LH-3/RH-2: [measure_rest]*10
+
+RH-2: phrase_rest | o5 melody_phrase2
+RH-1: o4 melody_phrase1 | o4 melody_phrase2
+LH-3: [[o4 arpeggio_dM]*2 [o3 arpeggio_bbM]*2]*2
+LH-2: [o4 melody_accompaniment_l2]*2
+LH-1: [o4 melody_accompaniment_l1]*2
+
+RH-2: section_C_subsection_A_RH2
+RH-1: section_C_subsection_A_RH1
+LH-3: [measure_rest]*8
+LH-2: section_C_subsection_A_LH2
+LH-1: section_C_subsection_A_LH1
+
+RH-2: section_D_subsection_A_RH2
+RH-1: section_D_subsection_A_RH1
+LH-3: section_D_subsection_A_LH3
+LH-2: section_D_subsection_A_LH2
+LH-1: section_D_subsection_A_LH1
+    
+(comment "ending")
+RH-2: 
+    measure_rest*7
+    o5 d4.~4~4.~4
+    measure_rest
+RH-1: 
+    measure_rest*7
+    o4 r8 a4~4~4.~4
+    measure_rest
+LH-3: 
+    measure_rest*7
+    o4 r8 r8 f+8~4~4.~4
+    measure_rest
+LH-2: 
+    (volume 75) [o4 r8 [o4 f+/a/>d]*2 [o4 e/a/>c] [o4 f+/a/>d]]*4
+    [o4 r8 [o4 f+/a/>d]*4]*3
+    (volume 100) o3 r8 r8 r8 a4~4.~4
+    measure_rest
+LH-1: 
+    o2 a8 [r]*4
+    g [r]*2 a g
+    f+ [r]*4
+    e [r]*4
+    [d [r]*4]*3
+    o2 r8 r8 r8 r8 f+8~4.~4
+    d8/>a/>f+/a/>d/f+ [r]*4
+%song-end
