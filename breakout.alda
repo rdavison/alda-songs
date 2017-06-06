@@ -1,0 +1,104 @@
+(comment "
+MIT License
+
+Copyright (c) 2017 Richard Davison
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE. ")
+
+(tempo! 120)
+
+measure_rest = [r8]*4
+
+square: o2
+
+    # introduction
+    g16 > d b > d g a b > d
+    V1: o3 d r16 d4 r8
+    V2: o5 c r16 c4 r8
+    V3: o4 d r16 d4 r8
+    V4: o5 f+ r16 f+4 r8
+
+    # infinite loop... control repetitions at the bottom of the file
+    [ V1: o4
+        g4 d8 g
+        f4 c8 f
+        e-4 d16 c < b a
+        (quant 50) b8 (quant 100) > d (quant 50) g (quant 100) a
+        g4 d8 g
+        f4 c8 f
+        e-4 d16 c < b a
+        (quant 50) b8 (quant 100) > d g4
+        g2
+        e-
+        f8 e- d c
+        d4 e-8 a-
+        g f e-4
+        e- f
+        c2
+        e-
+        e-4 f8 e-
+        d4 c <
+        b- > e-/c
+        a-8 b- > c < a-
+
+    V2: o4
+        measure_rest
+        measure_rest
+        measure_rest
+        measure_rest
+        b2 >
+        c2 <
+        a4 > c
+        c < b16 > c d e
+        f4 c8 f
+        e- d c4
+        e- c
+        f4 c8 f
+        e- d c4
+        < b-8 > c d e-
+        f4 c8 f
+        e- d c4
+        e- c
+        f c8 f
+        e- d c4
+        measure_rest
+
+    V3: (quant 50) o2
+        g8 > b < g > b <
+        g8 > b < g > b <
+        g8 > b < g > b <
+        g8 > b < g > b <
+        g8 > b < g > b <
+        g8 > b < g > b <
+        g8 > b < g > b <
+        g8 > b < g > b <
+        e- > e- < e- > e- <
+        a- > a- < a- > a- <
+        f > f < g a-
+        b- > b- < b- > b-
+        e- > e- < e- > e- <
+        c > c << b- > b- <
+        a > a < a > a <
+        a- > a- < a- > a- <
+        f > f < g a-
+        b- > b- < b- > b-
+        e- > e- < (quant 80) c4 < (quant 50)
+        a-8 > a- < g > b-
+
+] * 4
